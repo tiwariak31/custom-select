@@ -1,0 +1,41 @@
+<div class="select-wrapper-box">
+    <div class="cus-select-wrapper" *ngIf="activeModal">
+        <div class="cus-overlay" (click)="closecusmodal()">
+        </div>
+      <div class="list-container">
+          <div  class="deskClose"><span>Select your primary bank account</span>
+          <button class="cancleModal" (click)="closecusmodal()"></button></div>
+        <div class="search-box">
+          <div class="cus-close">
+            <button class="cancleModal" (click)="closecusmodal()"></button>
+          </div>
+          <input
+            class="input" id="searchText" name="dev"
+            type="text"
+            [(ngModel)]="searchString"
+            placeholder="Search your bank"
+            (ngModelChange)="filterList($event)"
+            (keyup)="arrowFunc($event)"
+            autocomplete="off"
+          />
+        </div>
+        <ul class="bank-list">
+          <li *ngFor="let bank of currentBanksList; let i = index" (click)="selectedFunc(bank[colName] , i)" [class.active]="i===indexvalue" class="list-item">
+            {{ bank[colName] }}
+          </li>
+          <li *ngIf="currentBanksList.length <= 0" class="no-result">
+            <div class="msg-box">
+              <div>No result not found</div>
+              <div class="line"></div>
+             <div class="not-my-bank">
+                <label class="container">my bank is not listed
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+             </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      </div>
+</div>
